@@ -2543,6 +2543,12 @@
         url = "https://dl.google.com/android/repository/emulator-darwin_x64-10366635.zip";
         sha1 = "61275840155fa458206c9768e463f33bdc4f7539";
       };
+      aarch64-linux = {
+        # downloaded from https://ci.android.com/builds/submitted/10437716/emulator-linux_aarch64/latest/sdk-repo-linux_aarch64-emulator-10437716.zip
+        # made available on a VPS behind CloudFlare- the diligent reader can download the official artifact and verify the SHA1 sum
+        url = "https://shared.initialed85.cc/sdk-repo-linux_aarch64-emulator-10437716.zip";
+        sha1 = "8b959c5eb795639c04c77d449b275eba3471ea4b";
+      };
       x86_64-linux = {
         url = "https://dl.google.com/android/repository/emulator-linux_x64-10366635.zip";
         sha1 = "b76adc0a055937d86aa54018e7aabb924630573b";

@@ -34,6 +34,11 @@
 , vulkan-loader
 , xkeyboard_config
 , zlib
+# these only seem to be required for the aarch64-linux variant
+, libsndfile
+, libasyncns
+, libapparmor
+, libxcb
 }:
 
 mkGeneric (lib.optionalAttrs stdenv.isLinux
@@ -69,16 +74,25 @@ mkGeneric (lib.optionalAttrs stdenv.isLinux
       nspr
       sqlite
       zlib
+      # these only seem to be required for the aarch64-linux variant
+      libsndfile
+      libasyncns
+      libapparmor
+      libxcb
     ];
 
     dontMoveLib64 = true;
     dontWrapQtApps = true;
 
     postUnpack = ''
-      # Vendored gles_mesa is out of date and causes the following:
-      #     LLVM ERROR: Cannot select: intrinsic %llvm.x86.sse41.pblendvb
-      #     Segmentation fault (core dumped)
-      rm -r $out/lib64/gles_mesa
+      # conditional handling of this- in the case of aarch64-linux the file
+      # doesn't exist in the emulator archive
+      if test -e $out/lib64/gles_mesa; then
+        # Vendored gles_mesa is out of date and causes the following:
+        #     LLVM ERROR: Cannot select: intrinsic %llvm.x86.sse41.pblendvb
+        #     Segmentation fault (core dumped)
+        rm -r $out/lib64/gles_mesa
+      fi
 
       # Force XCB platform plugin as Wayland isn't supported.
       # Inject libudev0-shim to fix udev_loader error.

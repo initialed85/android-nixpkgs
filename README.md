@@ -12,6 +12,7 @@ Currently we support the following platforms:
 
 - `aarch64-darwin`: MacOS on Apple Silicon
 - `x86_64-darwin`: MacOS on x86-64
+- `aarch64-linux`: Linux on AArch64 / ARM64 / ARMv8 (e.g. a Linux VM on Apple Silicon)
 - `x86_64-linux`: Linux on x86-64
 
 You should have `nix` installed, either because your're awesome and run NixOS, or you have installed
